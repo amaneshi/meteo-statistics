@@ -1,51 +1,51 @@
 ;(function () {
-    angular
-        .module('app')
-        .config(mainConfig)
-    // .config(['$mdIconProvider', function ($mdIconProvider) {
-    //     $mdIconProvider
-    //         .iconSet('social', 'bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-content-symbol.svg', 24)
-    //         .defaultIconSet('bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-content-symbol.svg', 24);
-    // }]);
+        'use strict';
 
-    mainConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+        angular
+            .module('app')
+            .config(mainConfig);
 
-    function mainConfig($stateProvider, $urlRouterProvider) {
+        mainConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
+        function mainConfig($stateProvider, $urlRouterProvider) {
 
-        $urlRouterProvider.otherwise('/home');
+            $urlRouterProvider.otherwise('/home');
 
-        $stateProvider
-
-            .state('home', {
-                url: '/home',
-                templateUrl: 'templates/homepage/homepage.html',
-                controller: 'HomepageController',
-                controllerAs: 'vm',
-                resolve: {
-                    data: function (weather) {
-                        return weather.get({
-                                q: 'Poltava,UA',
-                                appid: '264a4855a3aeeb5196ff38e3d006cbe9',
-                                mode: 'json',
-                                units: 'metric'
-                            })
-                            .then(function (res) {
-                                return res;
-                            })
+            $stateProvider
+                .state('home', {
+                    url: '/home',
+                    templateUrl: 'templates/homepage/homepage.html',
+                    controller: 'HomePageController',
+                    controllerAs: 'vm',
+                    resolve: {
+                        stations: getStationsList
                     }
-                }
-            })
-            .state('login', {
-                url: '/login',
-                templateUrl: 'templates/login/login.html',
-                controller: 'LoginController',
-                controllerAs: 'vm',
-            })
+                })
+                .state('station', {
+                    url: '/station/:station?state&file',
+                    templateUrl: 'templates/station/station.html',
+                    controller: 'StationPageController',
+                    controllerAs: 'vm',
+                    resolve: {
+                        data: getData,
+                        stations: getStationsList
+                    }
+                });
+        }
 
+        function getStationsList(getRemoteData) {
+            return getRemoteData.get();
+        }
 
+        function getData($q, $stateParams, stations, getRemoteData) {
+            return $q.all({
+                title: $stateParams.station,
+                state: $stateParams.state,
+                file: $stateParams.file,
+                content: getRemoteData.get($stateParams.file)
+            });
+        }
     }
 
-
-})();
+)();
 

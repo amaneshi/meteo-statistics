@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('blocks.services', [
-        'service.weather'
+        'service.weather',
+        'service.getRemoteData'
     ]);
 
 })();

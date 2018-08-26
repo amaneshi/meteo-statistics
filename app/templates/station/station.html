@@ -1,0 +1,154 @@
+<div class="stationpage" layout="row" ng-cloak>
+
+    <md-sidenav layout="column" class="md-sidenav-left" md-component-id="left"
+
+                md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="4">
+
+        <md-toolbar>
+            <h1 class="md-toolbar-tools">Select city from available list</h1>
+        </md-toolbar>
+
+        <md-content layout="column" flex>
+            <md-subheader class="md-primary">Open Stations</md-subheader>
+            <div layout-padding>
+                <md-list flex>
+                    <md-list-item ng-repeat="(cityName, cityInfo) in vm.stations.open"
+                                  ui-sref="station({station: cityName, state: 'open', file: cityInfo.url})">
+                        <p> {{cityName}} </p>
+                    </md-list-item>
+                </md-list>
+            </div>
+
+            <md-subheader class="md-primary">Closed Stations</md-subheader>
+            <div layout-padding>
+                <md-list flex layout-padding>
+                    <md-list-item ng-repeat="(cityName, cityInfo) in vm.stations.closed"
+                                  ui-sref="station({station: cityName, state: 'closed', file: cityInfo.url})">
+                        <p> {{cityName}} </p>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </md-content>
+    </md-sidenav>
+
+    <div layout="column" flex>
+        <md-toolbar layout="row">
+            <div class="md-toolbar-tools" flex>
+                <button class="md-button" ng-click="vm.toggleLeft()" hide-gt-sm type="button" aria-label="menu"
+                        style="min-width: 0;">
+                    <md-icon md-svg-src="content/img/icons/menu.svg" class="ng-scope" role="img" aria-hidden="true"
+                             style="transition-delay: 0ms;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 18 18" fit
+                             preserveAspectRatio="xMidYMid meet" focusable="false">
+                            <path d="M0 0h18v18h-18z" fill="none"></path>
+                            <path d="M2 13.5h14v-1.5h-14v1.5zm0-4h14v-1.5h-14v1.5zm0-5.5v1.5h14v-1.5h-14z"></path>
+                        </svg>
+                    </md-icon>
+                </button>
+
+                <h1>Weather history for</h1>
+                <md-button ng-click="vm.toggleLeft()" class="md-raised">
+                    <strong>{{vm.currentCity}}</strong>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-subheader>{{vm.stationDetails}}</md-subheader>
+
+        <md-content layout="column" flex layout-padding>
+
+            <div layout="row" layout-align="space-between">
+                <div layout="column" flex="50">
+                    <md-subheader>Basic Info</md-subheader>
+                    <md-list flex style="width: 100%">
+                        <!--<md-list-item class="" ng-click="null">-->
+                        <!--<div layout="row" layout-align="space-between" flex>-->
+                        <!--<div class="md-list-item-text" layout="column">-->
+                        <!--<h3><strong>ID:</strong></h3>-->
+                        <!--</div>-->
+                        <!--<div class="md-list-item-text" layout="column">-->
+                        <!--<p>{{vm.currentStation.id}}</p>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</md-list-item>-->
+                        <md-list-item class="" ng-click="null">
+                            <div layout="row" layout-align="space-between" flex>
+                                <div class="md-list-item-text" layout="column">
+                                    <h3><strong>Opened: &nbsp;&nbsp;{{vm.currentStation.opened}}</strong></h3>
+                                </div>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="" ng-click="null" ng-if="vm.currentStation.closed">
+                            <div layout="row" layout-align="space-between" flex>
+                                <div class="md-list-item-text" layout="column">
+                                    <h3><strong>Closed:&nbsp;&nbsp;{{vm.currentStation.closed}}</strong></h3>
+                                </div>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+                <div layout="column" flex="50">
+                    <md-subheader>Position</md-subheader>
+                    <md-list flex style="width: 100%">
+                        <md-list-item class="" ng-click="null">
+                            <div layout="row" layout-align="space-between" flex>
+                                <div class="md-list-item-text" layout="column">
+                                    <h3><strong>Latitude:&nbsp;&nbsp;{{vm.currentStation.lat + '\u00B0'}}</strong></h3>
+                                </div>
+                                <div class="md-list-item-text" layout="column">
+                                    <h3></h3>
+                                </div>
+                            </div>
+                        </md-list-item>
+                        <md-list-item class="" ng-click="null">
+                            <div layout="row" layout-align="space-between" flex>
+                                <div class="md-list-item-text" layout="column">
+                                    <h3><strong>Longitude:&nbsp;&nbsp;{{vm.currentStation.lon + '\u00B0'}}</strong></h3>
+                                </div>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </div>
+            </div>
+
+            <div layout="column" layout-align="stretch">
+
+                <table ng-table="vm.tableParams" class="table table-condensed table-bordered table-striped"
+                       show-filter="false">
+                    <tr ng-repeat="row in $data">
+                        <td title="'#'" filter="{ index: 'number'}" sortable="'index'">
+                            {{row.index}}
+                        </td>
+                        <td title="'Yaer'" filter="{ year: 'number'}" sortable="'name'">
+                            {{row.year}}
+                        </td>
+                        <td title="'Month'" filter="{ month: 'number'}" sortable="'month'">
+                            {{row.month}}
+                        </td>
+                        <td title="'Max Temperature (&deg;C)'" filter="{ tmax: 'number'}" sortable="'tmax'">
+                            {{row.tmax}}
+                        </td>
+                        <td title="'Min Temperature (&deg;C)'" filter="{ tmin: 'number'}" sortable="'tmin'">
+                            {{row.tmin}}
+                        </td>
+                        <td title="'AF (days)'" filter="{ af: 'number'}" sortable="'af'">
+                            {{row.af}}
+                        </td>
+                        <td title="'Rain (mm)'" filter="{ rain: 'number'}" sortable="'rain'">
+                            {{row.rain}}
+                        </td>
+                        <td title="'Sun (Hours)'" filter="{ sun: 'number'}" sortable="'sun'">
+                            {{row.sun}}
+                        </td>
+                        <td title="'Provision'" filter="{ comment: 'text'}" sortable="'comment'">
+                            {{row.comment}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </md-content>
+
+    </div>
+
+</div>

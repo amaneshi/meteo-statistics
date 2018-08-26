@@ -1,9 +1,10 @@
-let gulp = require('gulp');
-let serve = require('gulp-serve');
-let browserSync = require('browser-sync').create();
-let watch = require('gulp-watch');
-let sass = require('gulp-sass');
-let watchSass = require("gulp-watch-sass")
+"use strict";
+var gulp = require('gulp');
+//var serve = require('gulp-serve');
+var browserSync = require('browser-sync').create();
+//var watch = require('gulp-watch');
+var sass = require('gulp-sass');
+//var watchSass = require("gulp-watch-sass");
 
 gulp.task('browser-reload',function () {
     browserSync.reload();

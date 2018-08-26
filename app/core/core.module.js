@@ -2,9 +2,11 @@
     'use strict';
 
     angular.module('app.core', [
-        'ui.router', 'ngMaterial',
-        'ngAnimate', 'toastr'
+        'ui.router',
+        'ngMaterial',
+        'ngAnimate',
+        'toastr',
+        'ngTable'
     ]);
-
 
 })();

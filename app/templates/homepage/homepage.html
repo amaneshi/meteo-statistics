@@ -1,11 +1,40 @@
-<div class="homepage">
-    <div class="title">
-        Погода в городе <b>{{vm.weather.name}}</b>
-    </div>
-    <div class="temp">
-        Температура: {{vm.weather.main.temp}}
-    </div>
-    <div class="wind">
-        Ветер: {{vm.weather.wind.speed}}м/с
-    </div>
+<div class="homepage" layout="column" ng-cloak>
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+            <h1 flex><strong>Weather history site</strong></h1>
+        </div>
+    </md-toolbar>
+
+    <md-content layout="column" flex>
+
+        <div layout="column" layout-align="top">
+            <md-toolbar class="md-warn">
+                <h1 class="md-toolbar-tools">Select city from available list</h1>
+            </md-toolbar>
+
+            <md-content flex>
+                <md-subheader class="md-primary">Open Stations</md-subheader>
+                <div layout="row" layout-align="space-around" layout-wrap>
+                    <div ng-repeat="(cityName, cityInfo) in vm.stations.open" layout-margin>
+                        <md-button class="md-raised"
+                                   ui-sref="station({station: cityName, state: 'open', file: cityInfo.url})">
+                            <h3><strong>{{cityName}}</strong></h3>
+                        </md-button>
+                    </div>
+                </div>
+
+                <md-subheader class="md-primary">Closed Stations</md-subheader>
+                <div layout="row" layout-align="space-around" layout-wrap>
+                    <div ng-repeat="(cityName, cityInfo) in vm.stations.closed" layout-margin>
+                        <md-button class="md-raised"
+                                   ui-sref="station({station: cityName, state: 'open', file: cityInfo.url})">
+                            <h3><strong>{{cityName}}</strong></h3>
+                        </md-button>
+                    </div>
+                </div>
+            </md-content>
+        </div>
+
+    </md-content>
+
 </div>

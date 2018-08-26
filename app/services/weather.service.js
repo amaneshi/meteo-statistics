@@ -6,9 +6,9 @@
         .service('weather', weather);
 
 
-    weather.$inject = ['http', 'url'];
+    weather.$inject = ['$http', 'url'];
 
-    function weather(http, url) {
+    function weather($http, url) {
 
 
         return {
@@ -22,10 +22,10 @@
          * @returns {*}
          */
         function get(data) {
-            return http.get(url.weather, data)
+            return $http.get(url.weather, data)
                 .then(function (res) {
                     return res;
-                })
+                });
         }
     }
 })();

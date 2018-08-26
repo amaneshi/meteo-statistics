@@ -1,15 +1,16 @@
 ;(function () {
     'use strict';
 
-    angular.module('app')
-        .controller('HomepageController', HomepageController);
+    angular
+        .module('app')
+        .controller('HomePageController', HomePageController);
 
 
-    HomepageController.$inject = ['data'];
+    HomePageController.$inject = ['stations'];
 
-    function HomepageController(data) {
-        let vm = this;
+    function HomePageController(stations) {
+        var vm = this;
+        vm.stations = stations;
 
-        vm.weather = data;
     }
 })();

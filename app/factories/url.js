@@ -8,10 +8,15 @@
     url.$inject = [];
 
     function url() {
-        let baseUrl = 'http://api.openweathermap.org/data/2.5/';
-        return {
-            weather: baseUrl + 'weather'
-        };
+        var FilePath = {};
+        FilePath.getLink = getLink;
+
+        function getLink(cityName) {
+            var baseUrl = 'https://www.metoffice.gov.uk/pub/data/weather/uk/climate/';
+            return baseUrl + (cityName ? 'stationdata/' + cityName : 'historic/historic.json');
+        }
+
+        return FilePath;
     }
 
 })();
