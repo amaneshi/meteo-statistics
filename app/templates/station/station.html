@@ -65,14 +65,14 @@
                     <md-subheader>Basic Info</md-subheader>
                     <md-list flex style="width: 100%">
                         <md-list-item class="" ng-click="null">
-                            <div layout="row" layout-align="space-between" flex>
+                            <div layout="row" layout-align="center" flex>
                                 <div class="md-list-item-text" layout="column">
                                     <h3><strong>Opened: &nbsp;&nbsp;{{vm.currentStation.opened}}</strong></h3>
                                 </div>
                             </div>
                         </md-list-item>
                         <md-list-item class="" ng-click="null" ng-if="vm.currentStation.closed">
-                            <div layout="row" layout-align="space-between" flex>
+                            <div layout="row" layout-align="center" flex>
                                 <div class="md-list-item-text" layout="column">
                                     <h3><strong>Closed:&nbsp;&nbsp;{{vm.currentStation.closed}}</strong></h3>
                                 </div>
@@ -84,7 +84,7 @@
                     <md-subheader>Position</md-subheader>
                     <md-list flex style="width: 100%">
                         <md-list-item class="" ng-click="null">
-                            <div layout="row" layout-align="space-between" flex>
+                            <div layout="row" layout-align="center" flex>
                                 <div class="md-list-item-text" layout="column">
                                     <h3><strong>Latitude:&nbsp;&nbsp;{{vm.currentStation.lat + '\u00B0'}}</strong></h3>
                                 </div>
@@ -94,7 +94,7 @@
                             </div>
                         </md-list-item>
                         <md-list-item class="" ng-click="null">
-                            <div layout="row" layout-align="space-between" flex>
+                            <div layout="row" layout-align="center" flex>
                                 <div class="md-list-item-text" layout="column">
                                     <h3><strong>Longitude:&nbsp;&nbsp;{{vm.currentStation.lon + '\u00B0'}}</strong></h3>
                                 </div>
