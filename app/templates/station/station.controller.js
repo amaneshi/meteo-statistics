@@ -24,7 +24,6 @@
         function buildToggler(componentId) {
             return function () {
                 $mdSidenav(componentId).toggle();
-                $log.debug("toggle " + componentId + " is done");
             };
         }
 

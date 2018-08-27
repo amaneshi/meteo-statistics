@@ -53,7 +53,10 @@
             </div>
         </md-toolbar>
 
-        <md-subheader>{{vm.stationDetails}}</md-subheader>
+        <div layout="column">
+            <h1 layout="row" layout-align="center"><strong>{{vm.currentCity}}</strong></h1>
+            <md-subheader layout="row" layout-align="center">{{vm.stationDetails}}</md-subheader>
+        </div>
 
         <md-content layout="column" flex layout-padding>
 
@@ -61,16 +64,6 @@
                 <div layout="column" flex="50">
                     <md-subheader>Basic Info</md-subheader>
                     <md-list flex style="width: 100%">
-                        <!--<md-list-item class="" ng-click="null">-->
-                        <!--<div layout="row" layout-align="space-between" flex>-->
-                        <!--<div class="md-list-item-text" layout="column">-->
-                        <!--<h3><strong>ID:</strong></h3>-->
-                        <!--</div>-->
-                        <!--<div class="md-list-item-text" layout="column">-->
-                        <!--<p>{{vm.currentStation.id}}</p>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</md-list-item>-->
                         <md-list-item class="" ng-click="null">
                             <div layout="row" layout-align="space-between" flex>
                                 <div class="md-list-item-text" layout="column">
@@ -119,7 +112,7 @@
                         <td title="'#'" filter="{ index: 'number'}" sortable="'index'">
                             {{row.index}}
                         </td>
-                        <td title="'Yaer'" filter="{ year: 'number'}" sortable="'name'">
+                        <td title="'Year'" filter="{ year: 'number'}" sortable="'year'">
                             {{row.year}}
                         </td>
                         <td title="'Month'" filter="{ month: 'number'}" sortable="'month'">
