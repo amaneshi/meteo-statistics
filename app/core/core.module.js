@@ -5,7 +5,7 @@
         'ui.router',
         'ngMaterial',
         'ngAnimate',
-        'toastr',
+        //'toastr',
         'ngTable'
     ]);
 
