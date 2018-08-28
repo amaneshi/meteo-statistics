@@ -13,7 +13,7 @@
             <div layout-padding>
                 <md-list flex>
                     <md-list-item ng-repeat="(cityName, cityInfo) in vm.stations.open"
-                                  ui-sref="station({station: cityName, state: 'open', file: cityInfo.url})">
+                                  ui-sref="station({station: cityName, stationInfo:{city: cityName, state: 'open', url: cityInfo.url}})">
                         <p> {{cityName}} </p>
                     </md-list-item>
                 </md-list>
@@ -23,7 +23,7 @@
             <div layout-padding>
                 <md-list flex layout-padding>
                     <md-list-item ng-repeat="(cityName, cityInfo) in vm.stations.closed"
-                                  ui-sref="station({station: cityName, state: 'closed', file: cityInfo.url})">
+                                  ui-sref="station({station: cityName, stationInfo:{city: cityName, state: 'closed', url: cityInfo.url}})">
                         <p> {{cityName}} </p>
                     </md-list-item>
                 </md-list>

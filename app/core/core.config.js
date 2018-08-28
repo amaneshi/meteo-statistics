@@ -9,26 +9,29 @@
 
         function mainConfig($stateProvider, $urlRouterProvider) {
 
-            $urlRouterProvider.otherwise('/home');
+            $urlRouterProvider.otherwise('/station/');
 
             $stateProvider
-                .state('home', {
-                    url: '/home',
-                    templateUrl: 'templates/homepage/homepage.html',
-                    controller: 'HomePageController',
-                    controllerAs: 'vm',
-                    resolve: {
-                        stations: getStationsList
-                    }
-                })
+                // .state('home', {
+                //     url: '/home',
+                //     templateUrl: 'templates/homepage/homepage.html',
+                //     controller: 'HomePageController',
+                //     controllerAs: 'vm',
+                //     resolve: {
+                //         stations: getStationsList
+                //     }
+                // })
                 .state('station', {
-                    url: '/station/:station?state&file',
+                    url: '/station/:station',
                     templateUrl: 'templates/station/station.html',
                     controller: 'StationPageController',
                     controllerAs: 'vm',
                     resolve: {
                         data: getData,
                         stations: getStationsList
+                    },
+                    params : {
+                        stationInfo : {city: 'Aberporth', state: 'open', url: 'aberporthdata.txt'}
                     }
                 });
         }
@@ -37,12 +40,13 @@
             return getRemoteData.get();
         }
 
-        function getData($q, $stateParams, stations, getRemoteData) {
+        function getData($log, $q, $stateParams, stations, getRemoteData) {
+            var stationInfo = $stateParams.stationInfo;
+            $log.debug(stationInfo);
             return $q.all({
-                title: $stateParams.station,
-                state: $stateParams.state,
-                file: $stateParams.file,
-                content: getRemoteData.get($stateParams.file)
+                title: stationInfo.city,
+                state: stationInfo.state,
+                content: getRemoteData.get(stationInfo.url)
             });
         }
     }
